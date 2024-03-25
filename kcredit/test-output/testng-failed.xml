@@ -3,14 +3,14 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="Login.Login_Testcase">
+      <class name="Login.Kcredit">
         <methods>
-          <include name="Login_TC_002"/>
+          <include name="searchApplicationInLoanEntryModule"/>
           <include name="afterMethodConfiguration"/>
           <include name="beforeMethodConfiguration"/>
           <include name="beforeClassConfiguration"/>
         </methods>
-      </class> <!-- Login.Login_Testcase -->
+      </class> <!-- Login.Kcredit -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

@@ -51,7 +51,7 @@
               <ul>
                 <li>
                   <a href="#" panel-name="test-xml-Default_suite" class="navigator-link ">
-                    <span>C:\Users\gokulrajkaleidofin\AppData\Local\Temp\testng-eclipse--971993541\testng-customsuite.xml</span>
+                    <span>C:\Users\gokulrajkaleidofin\AppData\Local\Temp\testng-eclipse-1421613057\testng-customsuite.xml</span>
                   </a> <!-- navigator-link  -->
                 </li>
                 <li>
@@ -104,7 +104,7 @@
                     <div class="method-list-content failed suite-Default_suite">
                       <span>
                         <img src="failed.png" width="3%"/>
-                        <a href="#" panel-name="suite-Default_suite" title="Login.Login_Testcase" class="method navigator-link" hash-for-method="Login_TC_002">Login_TC_002</a> <!-- method navigator-link -->
+                        <a href="#" panel-name="suite-Default_suite" title="Login.Kcredit" class="method navigator-link" hash-for-method="searchApplicationInLoanEntryModule">searchApplicationInLoanEntryModule</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                     </div> <!-- method-list-content failed suite-Default_suite -->
@@ -122,23 +122,23 @@
           <div class="suite-Default_suite-class-failed">
             <div class="main-panel-header rounded-window-top">
               <img src="failed.png"/>
-              <span class="class-name">Login.Login_Testcase</span>
+              <span class="class-name">Login.Kcredit</span>
             </div> <!-- main-panel-header rounded-window-top -->
             <div class="main-panel-content rounded-window-bottom">
               <div class="method">
                 <div class="method-content">
-                  <a name="Login_TC_002">
-                  </a> <!-- Login_TC_002 -->
-                  <span class="method-name">Login_TC_002</span>
-                  <div class="stack-trace">org.openqa.selenium.NoSuchWindowException: no such window: target window already closed
-from unknown error: web view not found
+                  <a name="searchApplicationInLoanEntryModule">
+                  </a> <!-- searchApplicationInLoanEntryModule -->
+                  <span class="method-name">searchApplicationInLoanEntryModule</span>
+                  <div class="stack-trace">org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;(//td[text()=&quot; akone1262 &quot;]//following-sibling::td[text()=&quot; 8122244473 &quot;]//following-sibling::td//child::button//span[1])[1]&quot;}
   (Session info: chrome=123.0.6312.59)
+For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
 Build info: version: &apos;4.12.1&apos;, revision: &apos;8e34639b11&apos;
 System info: os.name: &apos;Windows 11&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;17.0.8&apos;
 Driver info: org.openqa.selenium.chrome.ChromeDriver
-Command: [d2846159aabd9ddc7a8fa2e03ccbae77, findElement {using=id, value=username}]
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 123.0.6312.59, chrome: {chromedriverVersion: 123.0.6312.58 (6b4b19e9dfbb..., userDataDir: C:\Users\GOKULR~1\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:60808}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:60808/devtoo..., se:cdpVersion: 123.0.6312.59, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
-Session ID: d2846159aabd9ddc7a8fa2e03ccbae77
+Command: [257037d87f373a1691b988ed404cf4f1, findElement {using=xpath, value=(//td[text()=&quot; akone1262 &quot;]//following-sibling::td[text()=&quot; 8122244473 &quot;]//following-sibling::td//child::button//span[1])[1]}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 123.0.6312.59, chrome: {chromedriverVersion: 123.0.6312.58 (6b4b19e9dfbb..., userDataDir: C:\Users\GOKULR~1\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:56901}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:56901/devtoo..., se:cdpVersion: 123.0.6312.59, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 257037d87f373a1691b988ed404cf4f1
 	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
 	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
@@ -155,10 +155,8 @@ Session ID: d2846159aabd9ddc7a8fa2e03ccbae77
 	at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:59)
 	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:359)
 	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:353)
-	at org.openqa.selenium.support.pagefactory.DefaultElementLocator.findElement(DefaultElementLocator.java:68)
-	at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:38)
-	at jdk.proxy2/jdk.proxy2.$Proxy17.sendKeys(Unknown Source)
-	at Login.Login_Testcase.Login_TC_002(Login_Testcase.java:36)
+	at Login.KcreditPage.viewDetailsOfTheApplication(KcreditPage.java:76)
+	at Login.Kcredit.searchApplicationInLoanEntryModule(Kcredit.java:11)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -196,7 +194,7 @@ Session ID: d2846159aabd9ddc7a8fa2e03ccbae77
         </div> <!-- panel Default_suite -->
         <div panel-name="test-xml-Default_suite" class="panel">
           <div class="main-panel-header rounded-window-top">
-            <span class="header-content">C:\Users\gokulrajkaleidofin\AppData\Local\Temp\testng-eclipse--971993541\testng-customsuite.xml</span>
+            <span class="header-content">C:\Users\gokulrajkaleidofin\AppData\Local\Temp\testng-eclipse-1421613057\testng-customsuite.xml</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <pre>
@@ -205,11 +203,11 @@ Session ID: d2846159aabd9ddc7a8fa2e03ccbae77
 &lt;suite name=&quot;Default suite&quot; guice-stage=&quot;DEVELOPMENT&quot;&gt;
   &lt;test thread-count=&quot;5&quot; name=&quot;Default test&quot; verbose=&quot;2&quot;&gt;
     &lt;classes&gt;
-      &lt;class name=&quot;Login.Login_Testcase&quot;&gt;
+      &lt;class name=&quot;Login.Kcredit&quot;&gt;
         &lt;methods&gt;
-          &lt;include name=&quot;Login_TC_002&quot;/&gt;
+          &lt;include name=&quot;searchApplicationInLoanEntryModule&quot;/&gt;
         &lt;/methods&gt;
-      &lt;/class&gt; &lt;!-- Login.Login_Testcase --&gt;
+      &lt;/class&gt; &lt;!-- Login.Kcredit --&gt;
     &lt;/classes&gt;
   &lt;/test&gt; &lt;!-- Default test --&gt;
 &lt;/suite&gt; &lt;!-- Default suite --&gt;
@@ -251,14 +249,14 @@ data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
 data.addRows(1);
 data.setCell(0, 0, 0)
-data.setCell(0, 1, 'Login_TC_002')
-data.setCell(0, 2, 'Login.Login_Testcase')
-data.setCell(0, 3, 6205);
+data.setCell(0, 1, 'searchApplicationInLoanEntryModule')
+data.setCell(0, 2, 'Login.Kcredit')
+data.setCell(0, 3, 27929);
 window.suiteTableData['Default_suite']= { tableData: data, tableDiv: 'times-div-Default_suite'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 6 seconds</span>
+              <span class="suite-total-time">Total running time: 27 seconds</span>
               <div id="times-div-Default_suite">
               </div> <!-- times-div-Default_suite -->
             </div> <!-- times-div -->
@@ -273,15 +271,13 @@ return data;
         </div> <!-- panel -->
         <div panel-name="ignored-methods-Default_suite" class="panel">
           <div class="main-panel-header rounded-window-top">
-            <span class="header-content">2 ignored methods</span>
+            <span class="header-content">1 ignored method</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <div class="ignored-class-div">
-              <span class="ignored-class-name">Login.Login_Testcase</span>
+              <span class="ignored-class-name">Login.Kcredit</span>
               <div class="ignored-methods-div">
-                <span class="ignored-method-name">Login_TC_003</span>
-                <br/>
-                <span class="ignored-method-name">Login_TC_001</span>
+                <span class="ignored-method-name">searchApplicationInLoanReviewModule</span>
                 <br/>
               </div> <!-- ignored-methods-div -->
             </div> <!-- ignored-class-div -->
@@ -293,26 +289,24 @@ return data;
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <div class="chronological-class">
-              <div class="chronological-class-name">Login.Login_Testcase</div> <!-- chronological-class-name -->
+              <div class="chronological-class-name">Login.Kcredit</div> <!-- chronological-class-name -->
               <div class="configuration-class before">
                 <span class="method-name">beforeClassConfiguration</span>
                 <span class="method-start">0 ms</span>
               </div> <!-- configuration-class before -->
               <div class="configuration-method before">
                 <span class="method-name">beforeMethodConfiguration</span>
-                <span class="method-start">8931 ms</span>
+                <span class="method-start">3749 ms</span>
               </div> <!-- configuration-method before -->
               <div class="test-method">
                 <img src="failed.png">
                 </img>
-                <span class="method-name">Login_TC_002</span>
-                <span class="method-start">9431 ms</span>
+                <span class="method-name">searchApplicationInLoanEntryModule</span>
+                <span class="method-start">3948 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method after">
-                <img src="failed.png">
-                </img>
                 <span class="method-name">afterMethodConfiguration</span>
-                <span class="method-start">15643 ms</span>
+                <span class="method-start">31884 ms</span>
               </div> <!-- configuration-method after -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
