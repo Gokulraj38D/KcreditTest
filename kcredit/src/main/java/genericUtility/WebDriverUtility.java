@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.time.Duration;
 import java.util.Set;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -15,7 +16,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class WebDriverUtility {
+public class WebDriverUtility  {
 	
 	Actions action = null;
 
@@ -147,6 +148,14 @@ public class WebDriverUtility {
 	File perfile=new File("./errorShots/"+Screenshotname+".png");
 	FileHandler.copy(tempfile, perfile);	
 	}
+	
+	
+	  public void clickElementWithJsExecutor(WebDriver driver,WebElement element) {
+	  JavascriptExecutor js=(JavascriptExecutor)driver;
+	  js.executeScript("arguments[0].click()",element);
+	  
+	  }
+	 
 
 
 }

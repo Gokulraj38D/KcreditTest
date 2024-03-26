@@ -11,7 +11,6 @@ import genericUtility.WebDriverUtility;
 
 public class KcreditPage extends BaseClass1 {
 	ExcelSheetUtility eutil=new ExcelSheetUtility();
-	WebDriverUtility wutil;
 	public void selectLoanEntry() {
 		WebElement loanentry = driver.findElement(By.xpath("//*[text()='start']"));
 		WebDriverUtility wutil = new WebDriverUtility();
@@ -71,10 +70,38 @@ public class KcreditPage extends BaseClass1 {
 		searchbutton.click();
 	}
 	
-	public void viewDetailsOfTheApplication() throws InterruptedException {
-		Thread.sleep(4000);
-		WebElement reviewbutton = driver.findElement(By.xpath("(//td[text()=\" CBA1Anandita26 \"]//following-sibling::td[text()=\" 8122244473 \"]//following-sibling::td//child::button//span[1])[1]"));
-		reviewbutton.click();
+	// This method is parked due to the table values are getting changed dinamically
+//	public void viewDetailsOfTheApplication() throws InterruptedException {
+//		Thread.sleep(4000);
+//		WebElement reviewbutton = driver.findElement(By.xpath("(//td[text()=\" CBA1Anandita26 \"]//following-sibling::td[text()=\" 8122244473 \"]//following-sibling::td//child::button//span[1])[1]"));
+//		reviewbutton.click();
+//	}
+	//@Test
+	public void loanEntryLoantypedropdown() throws InterruptedException {
+		WebDriverUtility wutil = new WebDriverUtility();
+		Thread.sleep(5000);
+		//WebElement laontypedropdown = driver.findElement(By.xpath("//mat-label[text()='Loan Type']"));
+		WebElement laontypedropdown1=driver.findElement(By.xpath("//*[text()='Loan Type']/parent::label/parent::span/parent::div"));
+		wutil.toMouseHover(driver, laontypedropdown1);
+		laontypedropdown1.click();
+		WebElement loantypevalues = driver.findElement(By.xpath("//div[@role='listbox']//child::mat-option[1]/child::span[contains(text(),'JLG')]"));
+		loantypevalues.click();
+		Thread.sleep(3000);
 	}
+	
+	public void loanEntrypartnerDropdown() throws InterruptedException {
+		Thread.sleep(3000);
+		WebElement partnerdropdown = driver.findElement(By.xpath("//*[text()='Partner']/parent::div/parent::div/parent::mat-select/parent::div/parent::div"));
+		WebDriverUtility wutil = new WebDriverUtility();
+		wutil.toMouseHover(driver, partnerdropdown);
+		partnerdropdown.click();
+		Thread.sleep(3000);
+		WebElement selectpartners = driver.findElement(By.xpath("//div[@class='options-container ng-tns-c83-7']/child::mat-option[1]"));
+		//wutil.clickElementWithJsExecutor(driver, selectpartners);
+		selectpartners.click();
+		Thread.sleep(3000);
+	}
+	
+	
 
 }
