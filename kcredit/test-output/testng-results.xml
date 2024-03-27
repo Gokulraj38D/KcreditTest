@@ -2,24 +2,24 @@
 <testng-results ignored="1" total="2" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2024-03-27T02:15:56 IST" name="Default suite" finished-at="2024-03-27T02:16:16 IST" duration-ms="20155">
+  <suite started-at="2024-03-27T17:23:33 IST" name="Default suite" finished-at="2024-03-27T17:24:01 IST" duration-ms="28048">
     <groups>
     </groups>
-    <test started-at="2024-03-27T02:15:56 IST" name="Default test" finished-at="2024-03-27T02:16:16 IST" duration-ms="20155">
+    <test started-at="2024-03-27T17:23:33 IST" name="Default test" finished-at="2024-03-27T17:24:01 IST" duration-ms="28048">
       <class name="Login.Kcredit">
-        <test-method is-config="true" signature="beforeClassConfiguration()[pri:0, instance:Login.Kcredit@77fbd92c]" started-at="2024-03-27T02:15:56 IST" name="beforeClassConfiguration" finished-at="2024-03-27T02:16:01 IST" duration-ms="4354" status="PASS">
+        <test-method is-config="true" signature="beforeClassConfiguration()[pri:0, instance:Login.Kcredit@67c27493]" started-at="2024-03-27T17:23:33 IST" name="beforeClassConfiguration" finished-at="2024-03-27T17:23:38 IST" duration-ms="4524" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- beforeClassConfiguration -->
-        <test-method is-config="true" signature="beforeMethodConfiguration()[pri:0, instance:Login.Kcredit@77fbd92c]" started-at="2024-03-27T02:16:01 IST" name="beforeMethodConfiguration" finished-at="2024-03-27T02:16:01 IST" duration-ms="220" status="PASS">
+        <test-method is-config="true" signature="beforeMethodConfiguration()[pri:0, instance:Login.Kcredit@67c27493]" started-at="2024-03-27T17:23:38 IST" name="beforeMethodConfiguration" finished-at="2024-03-27T17:23:38 IST" duration-ms="251" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- beforeMethodConfiguration -->
-        <test-method signature="searchApplicationInLoanReviewModule()[pri:0, instance:Login.Kcredit@77fbd92c]" started-at="2024-03-27T02:16:01 IST" name="searchApplicationInLoanReviewModule" finished-at="2024-03-27T02:16:13 IST" duration-ms="12269" status="PASS">
+        <test-method signature="searchApplicationInLoanReviewModule()[pri:0, instance:Login.Kcredit@67c27493]" started-at="2024-03-27T17:23:38 IST" name="searchApplicationInLoanReviewModule" finished-at="2024-03-27T17:23:58 IST" duration-ms="19923" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- searchApplicationInLoanReviewModule -->
-        <test-method is-config="true" signature="afterMethodConfiguration()[pri:0, instance:Login.Kcredit@77fbd92c]" started-at="2024-03-27T02:16:13 IST" name="afterMethodConfiguration" finished-at="2024-03-27T02:16:16 IST" duration-ms="3284" status="PASS">
+        <test-method is-config="true" signature="afterMethodConfiguration()[pri:0, instance:Login.Kcredit@67c27493]" started-at="2024-03-27T17:23:58 IST" name="afterMethodConfiguration" finished-at="2024-03-27T17:24:01 IST" duration-ms="3322" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- afterMethodConfiguration -->

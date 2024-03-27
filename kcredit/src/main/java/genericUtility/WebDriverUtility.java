@@ -34,7 +34,7 @@ public class WebDriverUtility  {
 	}
 
 	public void implicitWait(WebDriver driver) {
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 	}
 
 	public void explicitWait(WebDriver driver, WebElement element) {

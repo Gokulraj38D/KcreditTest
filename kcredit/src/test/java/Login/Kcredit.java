@@ -7,7 +7,7 @@ public class Kcredit extends KcreditPage{
 	@Test
 	public void searchApplicationInLoanEntryModule() throws InterruptedException {
 		selectLoanEntry();
-		loanEntryLoantypedropdown();
+		//loanEntryLoantypedropdown();
 		loanEntrypartnerDropdown();
 		//searchApplication();
 		
@@ -15,7 +15,8 @@ public class Kcredit extends KcreditPage{
 	@Test
 	public void searchApplicationInLoanReviewModule() throws InterruptedException {
 		selectLoanReview();
-		loanEntryLoantypedropdown();
+		//loanEntryLoantypedropdown();
+		loanEntrypartnerDropdown();
 		//searchApplication();
 		
 	}
