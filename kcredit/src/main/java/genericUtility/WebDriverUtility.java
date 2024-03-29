@@ -16,8 +16,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class WebDriverUtility  {
-	
+public class WebDriverUtility {
+
 	Actions action = null;
 
 	/**
@@ -141,21 +141,12 @@ public class WebDriverUtility  {
 			}
 		}
 	}
-	
-	public void toTakeScreenshots(WebDriver driver,String Screenshotname) throws IOException {
-	TakesScreenshot ts=(TakesScreenshot)driver;
-	File tempfile = ts.getScreenshotAs(OutputType.FILE);
-	File perfile=new File("./errorShots/"+Screenshotname+".png");
-	FileHandler.copy(tempfile, perfile);	
-	}
-	
-	
-	  public void clickElementWithJsExecutor(WebDriver driver,WebElement element) {
-	  JavascriptExecutor js=(JavascriptExecutor)driver;
-	  js.executeScript("arguments[0].click()",element);
-	  
-	  }
-	 
 
+	public void toTakeScreenshots(WebDriver driver, String Screenshotname) throws IOException {
+		TakesScreenshot ts = (TakesScreenshot) driver;
+		File tempfile = ts.getScreenshotAs(OutputType.FILE);
+		File perfile = new File("./errorShots/" + Screenshotname + ".png");
+		FileHandler.copy(tempfile, perfile);
+	}
 
 }

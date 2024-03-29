@@ -1,13 +1,13 @@
 package Login;
 
+import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.Select;
-import org.testng.annotations.Test;
 
 import genericUtility.BaseClass1;
 import genericUtility.ExcelSheetUtility;
@@ -15,6 +15,8 @@ import genericUtility.WebDriverUtility;
 
 public class KcreditPage extends BaseClass1 {
 	ExcelSheetUtility eutil = new ExcelSheetUtility();
+	WebDriverUtility wutil = new WebDriverUtility();
+
 
 	public void selectLoanEntry() {
 		WebElement loanentry = driver.findElement(By.xpath("//*[text()='start']"));
@@ -37,11 +39,13 @@ public class KcreditPage extends BaseClass1 {
 		driver.findElement(By.xpath("//*[text()=' Uploads ']")).click();
 	}
 
-	public void selectReports() {
+	public void selectReports() throws InterruptedException {
+		Thread.sleep(5000);
 		WebElement uploads = driver.findElement(By.xpath("//*[text()='pie_chart_outline']"));
 		WebDriverUtility wutil = new WebDriverUtility();
 		wutil.toMouseHover(driver, uploads);
 		driver.findElement(By.xpath("//*[text()=' Reports ']")).click();
+		Thread.sleep(3000);
 	}
 
 	public void ckycUploads() {
@@ -66,22 +70,19 @@ public class KcreditPage extends BaseClass1 {
 	}
 
 	// @Test
-	public void searchApplication() throws InterruptedException {
+	public void searchApplication() throws InterruptedException, IOException {
+		String mobilenumber = eutil.toGetDataFromExcelSheet("loandetails", 1, 0);
+		String partneloanid = eutil.toGetDataFromExcelSheet("loandetails", 1, 1);
+		String partnercustomerid = eutil.toGetDataFromExcelSheet("loandetails", 1, 2);
+		System.out.println(mobilenumber);
 		WebElement searchbar = driver.findElement(By.xpath("//*[contains(@placeholder,'Search by Application ID')]"));
-		searchbar.sendKeys("6111000376", Keys.SPACE);
+		searchbar.sendKeys(mobilenumber, Keys.SPACE);
 		WebDriverUtility wutil = new WebDriverUtility();
 		WebElement searchbutton = driver.findElement(By.xpath("//button[text()='Search']"));
 		wutil.visibilityOfElement(driver, searchbutton);
 		Thread.sleep(5000);
 		searchbutton.click();
 	}
-
-	// This method is parked due to the table values are getting changed dinamically
-//	public void viewDetailsOfTheApplication() throws InterruptedException {
-//		Thread.sleep(4000);
-//		WebElement reviewbutton = driver.findElement(By.xpath("(//td[text()=\" CBA1Anandita26 \"]//following-sibling::td[text()=\" 8122244473 \"]//following-sibling::td//child::button//span[1])[1]"));
-//		reviewbutton.click();
-//	}
 	// @Test
 	public void loanEntryLoantypedropdown() throws InterruptedException {
 		WebDriverUtility wutil = new WebDriverUtility();
@@ -95,46 +96,82 @@ public class KcreditPage extends BaseClass1 {
 		Thread.sleep(3000);
 	}
 
-	public void loanEntrypartnerDropdown() throws InterruptedException {
+	public void loanEntrypartnerDropdown1() throws InterruptedException, IOException {
+		String partnername = eutil.toGetDataFromExcelSheet("partners", 4, 0);
 		Thread.sleep(3000);
 		WebElement partnerdropdown = driver.findElement(By.xpath(
 				"//*[text()='Partner']/parent::label/parent::span/preceding-sibling::mat-select/parent::div/parent::div/parent::div"));
 		Thread.sleep(3000);
 		partnerdropdown.click();
+		 WebElement partnerid = driver.findElement(By.xpath("//*[text()='"+partnername+"']"));
+		System.out.println(partnerid);
+		partnerid.click();
+		Thread.sleep(3000);
+		driver.findElement(By.xpath("//*[@placeholder='Enter search text']")).sendKeys(Keys.TAB);
+		Thread.sleep(5000);
+	}
+	
+	public void missingDetails() throws IOException, InterruptedException {
+		Thread.sleep(5000);
+		String mobilenumber = eutil.toGetDataFromExcelSheet("loandetails", 1, 0);
+		String partneloanid = eutil.toGetDataFromExcelSheet("loandetails", 1, 1);
+		String partnercustomerid = eutil.toGetDataFromExcelSheet("loandetails", 1, 2);
+		WebElement missingdetailslink = driver.findElement(By.xpath("//*[text()=' "+partneloanid+" ']//following-sibling::td[text()=' "+mobilenumber+" ']/following-sibling::td[text()=' "+partnercustomerid+" ']//following-sibling::td/child::span[text()='Missing Details']"));
+		missingdetailslink.click();
 		Thread.sleep(2000);
-		WebElement partnersvalue = driver.findElement(By.xpath("//*[@role='listbox']/child::div[2]"));
-		String partnername = partnersvalue.getText();
-		System.out.println(partnername);
-		if (partnername.contains("Samasta")) {
-			partnersvalue.click();
+		List<WebElement> missingrequireddata = driver.findElements(By.xpath("//div[text()='Reason for incomplete']/parent::div//following-sibling::div[1]"));
+		for(WebElement data:missingrequireddata) {
+			String missingdata = data.getText();
+			System.out.println("missing required datas are :" +missingdata);
 		}
+		Thread.sleep(1000);
+		driver.findElement(By.xpath("//*[text()=' Copy ']")).click();
 		Thread.sleep(3000);
-		driver.findElement(By.xpath("//*[@placeholder='Enter search text']")).sendKeys(Keys.TAB);
+		driver.findElement(By.xpath("//*[text()='Cancel']")).click();
 		Thread.sleep(5000);
 	}
-
-	public void loanEntrypartnerDropdown1() throws InterruptedException {
-		Thread.sleep(3000);
-		WebElement partnerdropdown = driver.findElement(By.xpath(
-				"//*[text()='Partner']/parent::label/parent::span/preceding-sibling::mat-select/parent::div/parent::div/parent::div"));
-		Thread.sleep(3000);
-		partnerdropdown.click();
-		List<WebElement> partnerids = driver.findElements(By.xpath("//*[@class='options-container ng-tns-c83-18']"));
-		System.out.println(partnerids);
-		for (WebElement partnerid : partnerids) {
-			if (partnerid.equals("sonata")) {
-				partnerid.click();
-			}
-		}
-		Thread.sleep(3000);
-		driver.findElement(By.xpath("//*[@placeholder='Enter search text']")).sendKeys(Keys.TAB);
+	
+	public void generateApprovalMISreport() throws Exception {
 		Thread.sleep(5000);
+		//select porpose as internal/External (Expected: should choose External)
+		driver.findElement(By.xpath("//*[text()='Purpose']/parent::label/parent::span//parent::div/parent::div")).click();
+		driver.findElement(By.xpath("//*[text()='External']")).click();
+		
+		//select report section
+		WebElement reporttype = driver.findElement(By.xpath("//*[@formcontrolname='reportType']"));
+		reporttype.click();
+		driver.findElement(By.xpath("//span[text()='Approval']")).click();
+		Thread.sleep(5000);
+		reporttype.sendKeys(Keys.TAB);
+		
+		//select partners
+		String partnername = eutil.toGetDataFromExcelSheet("partners", 4, 0);
+		WebElement partner = driver.findElement(By.xpath("//mat-select[@ng-reflect-name='partners']"));
+		partner.click();
+		System.out.println("partnername :"+partner.getText());
+		Thread.sleep(2000);
+		driver.findElement(By.xpath("//span[text()='"+partnername+"']")).click();
+		partner.sendKeys(Keys.TAB);
+		
+		//Select Customer type
+		WebElement customertype = driver.findElement(By.xpath("//mat-select[@formcontrolname='customerType']"));
+		customertype.click();
+		driver.findElement(By.xpath("//span[text()='JLG']")).click();
+		customertype.sendKeys(Keys.TAB);
+		
+		//select Start date
+		WebElement startdate = driver.findElement(By.xpath("(//button[@aria-label='Open calendar'])[1]"));
+		startdate.click();
+		driver.findElement(By.xpath("//button[@aria-label='29 March 2024']")).click();
+		//select End date
+		WebElement enddate = driver.findElement(By.xpath("(//button[@aria-label='Open calendar'])[2]"));
+		enddate.click();
+		driver.findElement(By.xpath("//button[@aria-label='29 March 2024']")).click();
+		Thread.sleep(3000);
+		
+		//CLick Generate report button.
+		WebElement generatebutton = driver.findElement(By.xpath("//span[text()=' Generate Report ']"));
+		generatebutton.click();
+		Thread.sleep(3000);
 	}
-//		WebElement partnernameSearch = driver.findElement(By.xpath("//*[@role='listbox']/child::mat-form-field"));
-//		partnernameSearch.sendKeys("sonata");
-//		wutil.implicitWait(driver);
-//		WebElement selectpartners = driver.findElement(By.xpath("//div[@class='options-container ng-tns-c83-7']/child::mat-option[1]"));
-//		//wutil.clickElementWithJsExecutor(driver, selectpartners);
-//		selectpartners.click();
-	// Thread.sleep(3000);
 }

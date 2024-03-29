@@ -5,9 +5,9 @@
     <classes>
       <class name="Login.Kcredit">
         <methods>
-          <include name="searchApplicationInLoanEntryModule"/>
           <include name="afterMethodConfiguration"/>
           <include name="beforeMethodConfiguration"/>
+          <include name="verifymissingrequireddocumentsInMisReport"/>
           <include name="beforeClassConfiguration"/>
         </methods>
       </class> <!-- Login.Kcredit -->

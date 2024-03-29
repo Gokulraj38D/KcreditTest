@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="1" total="2" passed="1" failed="0" skipped="0">
+<testng-results ignored="2" total="3" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2024-03-27T17:23:33 IST" name="Default suite" finished-at="2024-03-27T17:24:01 IST" duration-ms="28048">
+  <suite started-at="2024-03-29T23:17:20 IST" name="Default suite" finished-at="2024-03-29T23:17:56 IST" duration-ms="35789">
     <groups>
     </groups>
-    <test started-at="2024-03-27T17:23:33 IST" name="Default test" finished-at="2024-03-27T17:24:01 IST" duration-ms="28048">
+    <test started-at="2024-03-29T23:17:20 IST" name="Default test" finished-at="2024-03-29T23:17:56 IST" duration-ms="35789">
       <class name="Login.Kcredit">
-        <test-method is-config="true" signature="beforeClassConfiguration()[pri:0, instance:Login.Kcredit@67c27493]" started-at="2024-03-27T17:23:33 IST" name="beforeClassConfiguration" finished-at="2024-03-27T17:23:38 IST" duration-ms="4524" status="PASS">
+        <test-method is-config="true" signature="beforeClassConfiguration()[pri:0, instance:Login.Kcredit@72967906]" started-at="2024-03-29T23:17:20 IST" name="beforeClassConfiguration" finished-at="2024-03-29T23:17:24 IST" duration-ms="4214" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- beforeClassConfiguration -->
-        <test-method is-config="true" signature="beforeMethodConfiguration()[pri:0, instance:Login.Kcredit@67c27493]" started-at="2024-03-27T17:23:38 IST" name="beforeMethodConfiguration" finished-at="2024-03-27T17:23:38 IST" duration-ms="251" status="PASS">
+        <test-method is-config="true" signature="beforeMethodConfiguration()[pri:0, instance:Login.Kcredit@72967906]" started-at="2024-03-29T23:17:24 IST" name="beforeMethodConfiguration" finished-at="2024-03-29T23:17:24 IST" duration-ms="223" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- beforeMethodConfiguration -->
-        <test-method signature="searchApplicationInLoanReviewModule()[pri:0, instance:Login.Kcredit@67c27493]" started-at="2024-03-27T17:23:38 IST" name="searchApplicationInLoanReviewModule" finished-at="2024-03-27T17:23:58 IST" duration-ms="19923" status="PASS">
+        <test-method signature="verifymissingrequireddocumentsInMisReport()[pri:0, instance:Login.Kcredit@72967906]" started-at="2024-03-29T23:17:24 IST" name="verifymissingrequireddocumentsInMisReport" finished-at="2024-03-29T23:17:52 IST" duration-ms="28020" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- searchApplicationInLoanReviewModule -->
-        <test-method is-config="true" signature="afterMethodConfiguration()[pri:0, instance:Login.Kcredit@67c27493]" started-at="2024-03-27T17:23:58 IST" name="afterMethodConfiguration" finished-at="2024-03-27T17:24:01 IST" duration-ms="3322" status="PASS">
+        </test-method> <!-- verifymissingrequireddocumentsInMisReport -->
+        <test-method is-config="true" signature="afterMethodConfiguration()[pri:0, instance:Login.Kcredit@72967906]" started-at="2024-03-29T23:17:52 IST" name="afterMethodConfiguration" finished-at="2024-03-29T23:17:56 IST" duration-ms="3301" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- afterMethodConfiguration -->
