@@ -1,6 +1,9 @@
 package Login;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -11,11 +14,13 @@ import org.openqa.selenium.WebElement;
 
 import genericUtility.BaseClass1;
 import genericUtility.ExcelSheetUtility;
+import genericUtility.JavaUtility;
 import genericUtility.WebDriverUtility;
 
 public class KcreditPage extends BaseClass1 {
 	ExcelSheetUtility eutil = new ExcelSheetUtility();
 	WebDriverUtility wutil = new WebDriverUtility();
+	JavaUtility jutil=new JavaUtility();
 
 
 	public void selectLoanEntry() {
@@ -84,14 +89,14 @@ public class KcreditPage extends BaseClass1 {
 		searchbutton.click();
 	}
 	// @Test
-	public void loanEntryLoantypedropdown() throws InterruptedException {
+	public void loanEntryLoantypedropdown(String loantype ) throws InterruptedException {
 		WebDriverUtility wutil = new WebDriverUtility();
 		Thread.sleep(5000);
 		WebElement laontypedropdown1 = driver
 				.findElement(By.xpath("//*[text()='Loan Type']/parent::label/parent::span/parent::div"));
 		laontypedropdown1.click();
 		WebElement loantypevalues = driver.findElement(
-				By.xpath("//div[@role='listbox']//child::mat-option[1]/child::span[contains(text(),'JLG')]"));
+				By.xpath("//div[@role='listbox']//child::mat-option[1]/child::span[contains(text(),'"+loantype+"')]"));
 		loantypevalues.click();
 		Thread.sleep(3000);
 	}
@@ -141,15 +146,14 @@ public class KcreditPage extends BaseClass1 {
 		WebElement reporttype = driver.findElement(By.xpath("//*[@formcontrolname='reportType']"));
 		reporttype.click();
 		driver.findElement(By.xpath("//span[text()='Approval']")).click();
-		Thread.sleep(5000);
+		Thread.sleep(2000);
 		reporttype.sendKeys(Keys.TAB);
 		
 		//select partners
 		String partnername = eutil.toGetDataFromExcelSheet("partners", 4, 0);
 		WebElement partner = driver.findElement(By.xpath("//mat-select[@ng-reflect-name='partners']"));
 		partner.click();
-		System.out.println("partnername :"+partner.getText());
-		Thread.sleep(2000);
+		System.out.println("partnername :"+partnername);
 		driver.findElement(By.xpath("//span[text()='"+partnername+"']")).click();
 		partner.sendKeys(Keys.TAB);
 		
@@ -167,11 +171,56 @@ public class KcreditPage extends BaseClass1 {
 		WebElement enddate = driver.findElement(By.xpath("(//button[@aria-label='Open calendar'])[2]"));
 		enddate.click();
 		driver.findElement(By.xpath("//button[@aria-label='29 March 2024']")).click();
-		Thread.sleep(3000);
+		Thread.sleep(1000);
 		
 		//CLick Generate report button.
 		WebElement generatebutton = driver.findElement(By.xpath("//span[text()=' Generate Report ']"));
 		generatebutton.click();
 		Thread.sleep(3000);
+	}
+	
+	public void downloadApprovalMISReport(int partnerid,String customertype) throws Exception {
+		WebElement downloadamisreport = driver.findElement(By.xpath("//td[text()='"+partnerid+"']/following-sibling::td[text()='"+customertype+"']/parent::tr//child::div//child::span/child::span[text()='download_for_offline']"));
+		downloadamisreport.click();
+	}
+	
+	public void MoveDownloadedFileToProjectDirectory() throws InterruptedException {
+		String currentdateandtime = jutil.dateandtime();
+		Thread.sleep(1000);
+		String downloadedFilePath=null;
+		// Path to the downloaded file
+		 downloadedFilePath = "Downloads/GenerateApprovalReport_13_Success_JLG_"+currentdateandtime+".xls"; 
+		// Path to the current project directory
+		String projectDirectoryPath = System.getProperty("./src/test/resources/ApprovalReport.xlsx");
+		try {
+			// Create Path objects for downloaded file and project directory
+			Path downloadedFile = Paths.get(downloadedFilePath);
+			Path projectDirectory = Paths.get(projectDirectoryPath);
+
+			// Move the downloaded file to the project directory
+			Files.move(downloadedFile, projectDirectory.resolve(downloadedFile.getFileName()));
+
+			System.out.println("File moved to project directory successfully.");
+		} catch (IOException e) {
+			System.err.println("Error moving file: " + e.getMessage());
+		}
+	}
+	
+	public void loanReviewPendingReview() throws InterruptedException {
+		String mobilenumber="6000006905";
+		driver.findElement(By.xpath("(//span[text()=' Loan Review ']/parent::span)[2]")).click();
+		Thread.sleep(3000);
+		driver.findElement(By.xpath("//span[text()=' Pending ']/parent::span")).click();
+		Thread.sleep(3000);
+		WebElement reviewbutton = driver.findElement(By.xpath("//*[text()=' Ankit06Automation ']//following-sibling::td[text()=' 6000006905 ']/following-sibling::td[text()=' Ankit06Automation ']//following-sibling::td[5]"));
+		reviewbutton.click();
+		//verification by using mobilenumber
+		String mobilenumberinunderwriting = driver.findElement(By.xpath("(//span[text()='6000006905'])[1]")).getText();
+		if (mobilenumber.equals(mobilenumberinunderwriting)) {
+			System.out.println(mobilenumberinunderwriting);
+		}
+		
+		
+		
 	}
 }

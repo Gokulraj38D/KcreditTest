@@ -9,7 +9,7 @@ public class Kcredit extends KcreditPage{
 	@Test
 	public void searchApplicationInLoanEntryModule() throws InterruptedException, IOException {
 		selectLoanEntry();
-		//loanEntryLoantypedropdown();
+		loanEntryLoantypedropdown("JLG");
 		loanEntrypartnerDropdown1();
 		searchApplication();
 		missingDetails();
@@ -18,23 +18,33 @@ public class Kcredit extends KcreditPage{
 	@Test
 	public void searchApplicationInLoanReviewModule() throws InterruptedException, IOException {
 		selectLoanReview();
-		//loanEntryLoantypedropdown();
+		loanEntryLoantypedropdown("JLG");
 		loanEntrypartnerDropdown1();
-		//searchApplication();
+		searchApplication();
 		
 	}
 	
 	@Test
 	public void verifymissingrequireddocumentsInMisReport() throws Exception {
-		//selectLoanEntry();
-		//loanEntryLoantypedropdown();
-		//loanEntrypartnerDropdown1();
-		//searchApplication();
-		//missingDetails();
+		selectLoanEntry();
+		loanEntryLoantypedropdown("JLG");
+		loanEntrypartnerDropdown1();
+		searchApplication();
+		missingDetails();
 		selectReports();
 		generateApprovalMISreport();
+		downloadApprovalMISReport(13,"JLG");
+		MoveDownloadedFileToProjectDirectory();
 		
 	}
+	@Test
+	public void editInUnderWritingScreen() throws Exception {
+		selectLoanReview();
+		loanReviewPendingReview();
+
+
+	}
+	
 		
 	}
 
