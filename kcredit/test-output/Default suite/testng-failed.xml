@@ -6,8 +6,8 @@
       <class name="Login.Kcredit">
         <methods>
           <include name="afterMethodConfiguration"/>
+          <include name="clicktoCategorydetails"/>
           <include name="beforeMethodConfiguration"/>
-          <include name="verifymissingrequireddocumentsInMisReport"/>
           <include name="beforeClassConfiguration"/>
         </methods>
       </class> <!-- Login.Kcredit -->

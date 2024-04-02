@@ -3,6 +3,7 @@ package genericUtility;
 import java.io.IOException;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -20,6 +21,7 @@ public class BaseClass1 {
 	ExcelSheetUtility eutil = new ExcelSheetUtility();
 	WebDriverUtility wutil = new WebDriverUtility();
 	public WebDriver driver = null;
+	JavascriptExecutor js=(JavascriptExecutor)driver;
 
 	@BeforeClass
 	public void beforeClassConfiguration() throws IOException {
