@@ -5,8 +5,8 @@
     <classes>
       <class name="Login.Kcredit">
         <methods>
+          <include name="endToEnd"/>
           <include name="afterMethodConfiguration"/>
-          <include name="clicktoCategorydetails"/>
           <include name="beforeMethodConfiguration"/>
           <include name="beforeClassConfiguration"/>
         </methods>

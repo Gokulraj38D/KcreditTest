@@ -12,8 +12,8 @@ public class Kcredit extends KcreditPage {
 	@Test
 	public void searchApplicationInLoanEntryModule() throws InterruptedException, IOException {
 		selectLoanEntry();
-		loanEntryLoantypedropdown("JLG");
-		loanEntrypartnerDropdown1();
+		//loanEntryLoantypedropdown("JLG");
+		//loanEntrypartnerDropdown1();
 		searchApplication();
 		missingDetails();
 
@@ -30,32 +30,37 @@ public class Kcredit extends KcreditPage {
 
 	@Test
 	public void verifymissingrequireddocumentsInMisReport() throws Exception {
-		// selectLoanEntry();
-		// loanEntryLoantypedropdown("JLG");
-		// loanEntrypartnerDropdown1();
-		// searchApplication();
-		// missingDetails();
 		selectReports();
 		generateApprovalMISreport();
 		downloadApprovalMISReport(13, "JLG");
-		// MoveDownloadedFileToProjectDirectory();
+		//MoveDownloadedFileToProjectDirectory();
 
 	}
 
 	@Test
 	public void clicktoCategorydetails() throws Exception {
 		selectLoanReview();
+		loanEntryLoantypedropdown("JLG");
+		loanEntrypartnerDropdown1();
 		searchApplication();
 		loanReviewPendingReview();
-		//toAgentInfo();
-		toCustomerBasicInfo();
-
+		toAgentInfo();
+		toBasicCustomerInfo();
 	}
-//	@Test
-//	public void gokul() throws Exception {
-//		getrequiredTestDataOf("a");
-//
-//	}
 	
+	@Test
+	public void endToEnd() throws InterruptedException, IOException {
+		//selectLoanEntry();
+		//String partnerloanid = searchApplication();
+		//toCheckApplicationinLoanEnrty(partnerloanid);
+		selectLoanReview();
+		searchApplication();
+		loanReviewPendingReview();
+		reworkApplication();
+		
+		
+	}
+	
+
 
 }

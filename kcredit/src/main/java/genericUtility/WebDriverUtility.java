@@ -8,6 +8,9 @@ import java.nio.file.Paths;
 import java.time.Duration;
 import java.util.Set;
 
+import javax.swing.Action;
+
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -131,6 +134,10 @@ public class WebDriverUtility {
 
 	public void toSwitchToAlertAndDismiss(WebDriver driver) {
 		driver.switchTo().alert().dismiss();
+	}
+	public void toScrollBottomOfthePage(WebDriver driver) {
+		Actions action=new Actions(driver);
+		action.keyDown(Keys.CONTROL).sendKeys(Keys.END).perform();
 	}
 
 	public void toSwitchWindow(WebDriver driver, String actualtitle) {

@@ -6,7 +6,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.JScrollBar;
 
@@ -14,10 +16,13 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.io.FileHandler;
 
 import genericUtility.BaseClass1;
 import genericUtility.ExcelSheetUtility;
+import genericUtility.IconstantUtility;
 import genericUtility.JavaUtility;
 import genericUtility.WebDriverUtility;
 
@@ -77,11 +82,10 @@ public class KcreditPage extends BaseClass1 {
 		driver.findElement(By.xpath("//*[text()=' History ']")).click();
 	}
 
-	// @Test
-	public void searchApplication() throws InterruptedException, IOException {
-		String mobilenumber = eutil.toGetDataFromExcelSheet("loandetails", 1, 0);
-		String partneloanid = eutil.toGetDataFromExcelSheet("loandetails", 1, 1);
-		String partnercustomerid = eutil.toGetDataFromExcelSheet("loandetails", 1, 2);
+	public String searchApplication() throws InterruptedException, IOException {
+		String mobilenumber = eutil.toGetDataFromExcelSheet("loandetails", 5, 0);
+		String partneloanid = eutil.toGetDataFromExcelSheet("loandetails", 5, 1);
+		String partnercustomerid = eutil.toGetDataFromExcelSheet("loandetails", 5, 2);
 		System.out.println(mobilenumber);
 		WebElement searchbar = driver.findElement(By.xpath("//*[contains(@placeholder,'Search by Application ID')]"));
 		searchbar.sendKeys(mobilenumber, Keys.SPACE);
@@ -90,11 +94,37 @@ public class KcreditPage extends BaseClass1 {
 		wutil.visibilityOfElement(driver, searchbutton);
 		Thread.sleep(5000);
 		searchbutton.click();
+		Thread.sleep(5000);
+		return partneloanid;
 		
+	}
+	public void toCheckApplicationinLoanEnrty(String loanid) throws InterruptedException, IOException {
+		int count = 120;
+		int clickcount = 0;
+		boolean flag = true;
+		while (flag) {
+			try {
+				 WebElement partnerloanid = driver.findElement(By.xpath("//td[text()=' " + loanid + " '][1]"));
+				//System.out.println("partnerloanid : " + partnerloanid);
+				WebElement incompletebutton = driver
+						.findElement(By.xpath("//span[text()=' Incomplete ']/parent::span"));
+				incompletebutton.click();
+				Thread.sleep(1000);
+				clickcount++;
+				System.out.println("clickcount : "+clickcount);
+				if(clickcount>count) {
+					System.out.println("Please check missing documents/Please check schedular timings");
+				}
+				break;
+			} catch (Exception e) {
+				System.out.println("Application not found");
+				flag = false;
+			}
+		}
 		
 	}
 
-	// @Test
+
 	public void loanEntryLoantypedropdown(String loantype) throws InterruptedException {
 		WebDriverUtility wutil = new WebDriverUtility();
 		Thread.sleep(5000);
@@ -109,24 +139,24 @@ public class KcreditPage extends BaseClass1 {
 
 	public void loanEntrypartnerDropdown1() throws InterruptedException, IOException {
 		String partnername = eutil.toGetDataFromExcelSheet("partners", 4, 0);
-		Thread.sleep(3000);
+		Thread.sleep(1000);
 		WebElement partnerdropdown = driver.findElement(By.xpath(
 				"//*[text()='Partner']/parent::label/parent::span/preceding-sibling::mat-select/parent::div/parent::div/parent::div"));
-		Thread.sleep(3000);
+		Thread.sleep(2000);
 		partnerdropdown.click();
 		WebElement partnerid = driver.findElement(By.xpath("//*[text()='" + partnername + "']"));
 		System.out.println(partnerid);
 		partnerid.click();
-		Thread.sleep(3000);
+		Thread.sleep(2000);
 		driver.findElement(By.xpath("//*[@placeholder='Enter search text']")).sendKeys(Keys.TAB);
-		Thread.sleep(5000);
+		Thread.sleep(4000);
 	}
 
 	public void missingDetails() throws IOException, InterruptedException {
 		Thread.sleep(5000);
-		String mobilenumber = eutil.toGetDataFromExcelSheet("loandetails", 1, 0);
-		String partneloanid = eutil.toGetDataFromExcelSheet("loandetails", 1, 1);
-		String partnercustomerid = eutil.toGetDataFromExcelSheet("loandetails", 1, 2);
+		String mobilenumber = eutil.toGetDataFromExcelSheet("loandetails", 3, 0);
+		String partneloanid = eutil.toGetDataFromExcelSheet("loandetails", 3, 1);
+		String partnercustomerid = eutil.toGetDataFromExcelSheet("loandetails", 3, 2);
 		WebElement missingdetailslink = driver.findElement(By.xpath("//*[text()=' " + partneloanid
 				+ " ']//following-sibling::td[text()=' " + mobilenumber + " ']/following-sibling::td[text()=' "
 				+ partnercustomerid + " ']//following-sibling::td/child::span[text()='Missing Details']"));
@@ -201,44 +231,43 @@ public class KcreditPage extends BaseClass1 {
 	}
 
 	public void MoveDownloadedFileToProjectDirectory() throws InterruptedException, IOException {
-		String currentdateandtime = jutil.dateandtime();
-		String sourceFilePath = "Downloads/GenerateApprovalReport_13_Success_JLG_" + currentdateandtime + ".xls";
-		String destinationFilePath = "./src/test/resources/ApprovalReport.xlsx";
-
-		// Create File objects for source and destination files
-		File sourceFile = new File(sourceFilePath);
-		File destinationFile = new File(destinationFilePath);
-
-		try {
-			// Copy file using Files.copy() method
-			Path sourcePath = Paths.get(sourceFile.getAbsolutePath());
-			Path destinationPath = Paths.get(destinationFile.getAbsolutePath());
-			Files.copy(sourcePath, destinationPath);
-
-			// Print confirmation message
-			System.out.println("File copied successfully.");
-		} catch (IOException e) {
-			// Handle exception if file copy fails
-			e.printStackTrace();
-		}
-//		File file=new File("Downloads/GenerateApprovalReport_13_Success_JLG_"+currentdateandtime+".xls");
-//		File file1=new File("./src/test/resources/ApprovalReport.xlsx");
-//		FileHandler.copy(file, file1);
-
+//		String currentdateandtime = jutil.dateandtime();
+//		System.out.println(currentdateandtime);
+//		//GenerateApprovalReport_13_Success_JLG_20240403172554.xls
+//		//20240403172556
+//		String temppath = IconstantUtility.documentdocunloadpath + currentdateandtime + ".xls";
+//		String permenantpath = IconstantUtility.documentmovedpath;
+//		File sourceFile = new File(temppath);
+//		File destinationFile = new File(permenantpath);
+//		try {
+//			// Copy file using Files.copy() method
+//			Path sourcePath = Paths.get(sourceFile.getAbsolutePath());
+//			Path destinationPath = Paths.get(destinationFile.getAbsolutePath());
+//			Files.copy(sourcePath, destinationPath);
+//			// Print confirmation message
+//			System.out.println("File copied successfully.");
+//		} catch (IOException e) {
+//			// Handle exception if file copy fails
+//			e.printStackTrace();
+//		}
+		String downloadFilepath = (System.getProperty("user.dir") + "\\download");
+		ChromeOptions options = new ChromeOptions();
+		Map<String, Object> prefs = new HashMap<String, Object>();
+		prefs.put("approvalReport", downloadFilepath);
+		options.setExperimentalOption("prefs", prefs);
 	}
 
 	public void loanReviewPendingReview() throws InterruptedException, IOException {
 		Thread.sleep(3000);
-		String mobilenumber = eutil.toGetDataFromExcelSheet("loandetails", 1, 0);
-		String partneloanid = eutil.toGetDataFromExcelSheet("loandetails", 1, 1);
-		String partnercustomerid = eutil.toGetDataFromExcelSheet("loandetails", 1, 2);
+		String mobilenumber = eutil.toGetDataFromExcelSheet("loandetails", 5, 0);
+		String partneloanid = eutil.toGetDataFromExcelSheet("loandetails", 5, 1);
+		String partnercustomerid = eutil.toGetDataFromExcelSheet("loandetails", 5, 2);
 		driver.findElement(By.xpath("(//span[text()=' Loan Review ']/parent::span)[2]")).click();
 		Thread.sleep(3000);
 		driver.findElement(By.xpath("//span[text()=' Pending ']/parent::span")).click();
 		Thread.sleep(3000);
-		WebElement reviewbutton = driver.findElement(
-				By.xpath("//*[text()=' " + partneloanid + " ']//following-sibling::td[text()=' " + mobilenumber
-						+ " ']/following-sibling::td[text()=' " + partnercustomerid + " ']//following-sibling::td[5]"));
+		WebElement reviewbutton = driver.findElement(By.xpath("//*[text()=' " + partneloanid
+				+ " ']//following-sibling::td[@ng-reflect-ng-switch='buttonWithNotification']//child::span[text()='Review']"));
 		wutil.toMouseHover(driver, reviewbutton);
 		Thread.sleep(2000);
 		reviewbutton.click();
@@ -276,21 +305,51 @@ public class KcreditPage extends BaseClass1 {
 
 	}
 
-	public void toCustomerBasicInfo() throws InterruptedException, IOException {
+	public void toBasicCustomerInfo() throws InterruptedException, IOException {
 		Thread.sleep(2000);
 		WebElement basiccustomerinfo = driver.findElement(By.xpath("//button[text()=' Basic Customer Info ']"));
 		basiccustomerinfo.click();
 		String BCI1 = basiccustomerinfo.getText();
 		Thread.sleep(3000);
-		WebElement basiccustomerinfoheading = driver.findElement(By.xpath("//h2[text()=' Basic Customer Info ']"));
+		WebElement basiccustomerinfoheading = driver.findElement(By.xpath("//div[text()='Basic Customer Info']"));
 		String BCI2 = basiccustomerinfoheading.getText();
+		Thread.sleep(2000);
+		// Edit Gender
+		WebElement BasicCustomerInfoEdit = driver
+				.findElement(By.xpath("//div[text()='Basic Customer Info']/parent::div//child::span[text()='Edit']"));
+		BasicCustomerInfoEdit.click();
+		driver.findElement(By.name("gender2")).click();
+		Thread.sleep(2000);
+		WebElement genderlist = driver.findElement(By.xpath("//span[text()=' Transgender ']"));
+		genderlist.click();
+		WebElement BasicCustomerSavebutton = driver
+				.findElement(By.xpath("//div[text()='Basic Customer Info']/parent::div//span[text()='Save']"));
+		BasicCustomerSavebutton.click();
 		Thread.sleep(2000);
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("window.scrollTo(0,0);");
 		Thread.sleep(2000);
 	}
-	
-
-
+	public void reworkApplication() throws InterruptedException {
+		wutil.toScrollBottomOfthePage(driver);
+		Thread.sleep(2000);
+		WebElement evaluateButton = driver.findElement(By.xpath("//span[text()=' Evaluate Application']/parent::button[@id='reject']"));
+		evaluateButton.click();
+		Thread.sleep(1000);
+		String confirmationpopup = driver.findElement(By.xpath("//h4[text()='Confirmation']")).getText();
+		System.out.println(confirmationpopup);
+		WebElement reworkbutton = driver.findElement(By.xpath("//mat-radio-group[@name='rejectionTypeSelect']//child::mat-radio-button[@ng-reflect-value='retry']"));
+		reworkbutton.click();
+		Thread.sleep(3000);
+//		WebElement categoryOfReasonDropdown = driver.findElement(By.xpath("//mat-placeholder[text()='Category of Reasons']"));
+//		categoryOfReasonDropdown.click();
+//		Thread.sleep(1000);
+//		WebElement searchbox = driver.findElement(By.xpath("//mat-placeholder[text()='Search']/parent::label/parent::span"));
+//		categoryOfReasonDropdown.sendKeys("other documents");
+//		Thread.sleep(1000);
+//		driver.findElement(By.xpath("//span[text()=' Other documents related discrepancies ']")).click();
+		
+		
+	}
 
 }
