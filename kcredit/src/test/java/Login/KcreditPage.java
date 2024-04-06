@@ -96,23 +96,24 @@ public class KcreditPage extends BaseClass1 {
 		searchbutton.click();
 		Thread.sleep(5000);
 		return partneloanid;
-		
+
 	}
+
 	public void toCheckApplicationinLoanEnrty(String loanid) throws InterruptedException, IOException {
 		int count = 120;
 		int clickcount = 0;
 		boolean flag = true;
 		while (flag) {
 			try {
-				 WebElement partnerloanid = driver.findElement(By.xpath("//td[text()=' " + loanid + " '][1]"));
-				//System.out.println("partnerloanid : " + partnerloanid);
+				WebElement partnerloanid = driver.findElement(By.xpath("//td[text()=' " + loanid + " '][1]"));
+				// System.out.println("partnerloanid : " + partnerloanid);
 				WebElement incompletebutton = driver
 						.findElement(By.xpath("//span[text()=' Incomplete ']/parent::span"));
 				incompletebutton.click();
 				Thread.sleep(1000);
 				clickcount++;
-				System.out.println("clickcount : "+clickcount);
-				if(clickcount>count) {
+				System.out.println("clickcount : " + clickcount);
+				if (clickcount > count) {
 					System.out.println("Please check missing documents/Please check schedular timings");
 				}
 				break;
@@ -121,9 +122,8 @@ public class KcreditPage extends BaseClass1 {
 				flag = false;
 			}
 		}
-		
-	}
 
+	}
 
 	public void loanEntryLoantypedropdown(String loantype) throws InterruptedException {
 		WebDriverUtility wutil = new WebDriverUtility();
@@ -330,26 +330,86 @@ public class KcreditPage extends BaseClass1 {
 		js.executeScript("window.scrollTo(0,0);");
 		Thread.sleep(2000);
 	}
+
 	public void reworkApplication() throws InterruptedException {
 		wutil.toScrollBottomOfthePage(driver);
 		Thread.sleep(2000);
-		WebElement evaluateButton = driver.findElement(By.xpath("//span[text()=' Evaluate Application']/parent::button[@id='reject']"));
+		WebElement evaluateButton = driver
+				.findElement(By.xpath("//span[text()=' Evaluate Application']/parent::button[@id='reject']"));
 		evaluateButton.click();
 		Thread.sleep(1000);
 		String confirmationpopup = driver.findElement(By.xpath("//h4[text()='Confirmation']")).getText();
 		System.out.println(confirmationpopup);
-		WebElement reworkbutton = driver.findElement(By.xpath("//mat-radio-group[@name='rejectionTypeSelect']//child::mat-radio-button[@ng-reflect-value='retry']"));
+		WebElement reworkbutton = driver.findElement(By.xpath(
+				"//mat-radio-group[@name='rejectionTypeSelect']//child::mat-radio-button[@ng-reflect-value='retry']"));
 		reworkbutton.click();
 		Thread.sleep(3000);
-//		WebElement categoryOfReasonDropdown = driver.findElement(By.xpath("//mat-placeholder[text()='Category of Reasons']"));
-//		categoryOfReasonDropdown.click();
-//		Thread.sleep(1000);
-//		WebElement searchbox = driver.findElement(By.xpath("//mat-placeholder[text()='Search']/parent::label/parent::span"));
-//		categoryOfReasonDropdown.sendKeys("other documents");
-//		Thread.sleep(1000);
-//		driver.findElement(By.xpath("//span[text()=' Other documents related discrepancies ']")).click();
-		
-		
+		WebElement categoryOfReasonDropdown = driver
+				.findElement(By.xpath("//mat-placeholder[text()='Category of Reasons']"));
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("arguments[0].click();", categoryOfReasonDropdown);
+		Thread.sleep(1000);
+		driver.findElement(By.xpath("//span[text()=' Loan Application related discrepancies ']")).click();
+		Thread.sleep(2000);
+		WebElement rejectreason = driver
+				.findElement(By.xpath("//textarea[@id='mat-input-0' or @name='rejectionReason']"));
+		rejectreason.sendKeys("Kyc data not available");
+		driver.findElement(By.xpath("//span[text()='Resubmit Loan Documents']")).click();
+		WebElement evaluate = driver.findElement(By.xpath("//span[text()='Yes,Evaluate']/parent::span/parent::button"));
+		if (evaluate.isEnabled()) {
+			evaluate.click();
+		} else {
+			System.out.println("Evaluate is not enabled");
+		}
+
+	}
+	public void finalRejectApplication() throws InterruptedException {
+		wutil.toScrollBottomOfthePage(driver);
+		Thread.sleep(2000);
+		WebElement evaluateButton = driver
+				.findElement(By.xpath("//span[text()=' Evaluate Application']/parent::button[@id='reject']"));
+		evaluateButton.click();
+		Thread.sleep(1000);
+		String confirmationpopup = driver.findElement(By.xpath("//h4[text()='Confirmation']")).getText();
+		System.out.println(confirmationpopup);
+		WebElement reworkbutton = driver.findElement(By.xpath(
+				"//mat-radio-group[@name='rejectionTypeSelect']/child::span[2]//child::span[text()='Final Reject']"));
+		reworkbutton.click();
+		Thread.sleep(3000);
+		WebElement categoryOfReasonDropdown = driver
+				.findElement(By.xpath("//mat-placeholder[text()='Category of Reasons']"));
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("arguments[0].click();", categoryOfReasonDropdown);
+		Thread.sleep(1000);
+		driver.findElement(By.xpath("//span[text()=' Loan Application related discrepancies ']")).click();
+		Thread.sleep(2000);
+		WebElement rejectreason = driver
+				.findElement(By.xpath("//textarea[@id='mat-input-0' or @name='rejectionReason']"));
+		rejectreason.sendKeys("Kyc data not available");
+//		driver.findElement(By.xpath("//span[text()='Resubmit Loan Documents']")).click();
+//		WebElement evaluate = driver.findElement(By.xpath("//span[text()='Yes,Evaluate']/parent::span/parent::button"));
+//		if (evaluate.isEnabled()) {
+//			evaluate.click();
+//		} else {
+//			System.out.println("Evaluate is not enabled");
+//		}
+
+	}
+
+	public void approveApplication() throws InterruptedException {
+		wutil.toScrollBottomOfthePage(driver);
+		Thread.sleep(2000);
+		WebElement ApproveButton = driver.findElement(
+				By.xpath("//span[text()=' Approve Application']/parent::button[@id='conditionalapprove']"));
+		ApproveButton.click();
+		Thread.sleep(1000);
+		String confirmationpopup = driver.findElement(By.xpath("//h4[text()='Confirmation']")).getText();
+		System.out.println(confirmationpopup);
+		WebElement commentbox = driver.findElement(By.xpath("//textarea[@ng-reflect-name='comment']"));
+		commentbox.sendKeys("Approved");
+		Thread.sleep(3000);
+		//WebElement Approvebutton = driver.findElement(By.xpath("//span[text()='Yes, Approve']/parent::button"));
+		//Approvebutton.click();
 	}
 
 }

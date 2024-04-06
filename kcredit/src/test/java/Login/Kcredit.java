@@ -56,7 +56,9 @@ public class Kcredit extends KcreditPage {
 		selectLoanReview();
 		searchApplication();
 		loanReviewPendingReview();
-		reworkApplication();
+		//reworkApplication();
+		finalRejectApplication();
+		//approveApplication();
 		
 		
 	}
