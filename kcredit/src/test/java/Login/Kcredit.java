@@ -56,11 +56,20 @@ public class Kcredit extends KcreditPage {
 		selectLoanReview();
 		searchApplication();
 		loanReviewPendingReview();
-		//reworkApplication();
+		reworkApplication();
 		finalRejectApplication();
 		//approveApplication();
-		
-		
+	}
+	
+	@Test
+	public void loanAgreement() throws InterruptedException, IOException {
+		Thread.sleep(2000);
+		selectLoanReview();
+		loanAgreementPending();
+		searchApplication();
+		//toCheckApplicationinLoanAgreement("PPKCPLAPL1004241208");
+		loanAgreementReceived();
+		toCheckApplicationinLoanAgreementReceived("PPKCPLAPL1004241208");
 	}
 	
 

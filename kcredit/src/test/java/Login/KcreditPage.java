@@ -85,10 +85,11 @@ public class KcreditPage extends BaseClass1 {
 	public String searchApplication() throws InterruptedException, IOException {
 		String mobilenumber = eutil.toGetDataFromExcelSheet("loandetails", 5, 0);
 		String partneloanid = eutil.toGetDataFromExcelSheet("loandetails", 5, 1);
-		String partnercustomerid = eutil.toGetDataFromExcelSheet("loandetails", 5, 2);
+		// String partnercustomerid = eutil.toGetDataFromExcelSheet("loandetails", 5,
+		// 2);
 		System.out.println(mobilenumber);
 		WebElement searchbar = driver.findElement(By.xpath("//*[contains(@placeholder,'Search by Application ID')]"));
-		searchbar.sendKeys(mobilenumber, Keys.SPACE);
+		searchbar.sendKeys("6000012345", Keys.SPACE);
 		WebDriverUtility wutil = new WebDriverUtility();
 		WebElement searchbutton = driver.findElement(By.xpath("//button[text()='Search']"));
 		wutil.visibilityOfElement(driver, searchbutton);
@@ -123,6 +124,76 @@ public class KcreditPage extends BaseClass1 {
 			}
 		}
 
+	}
+
+	public void toCheckApplicationinLoanReview(String loanid) throws InterruptedException, IOException {
+		int count = 120;
+		int clickcount = 0;
+		boolean flag = true;
+		while (flag) {
+			try {
+				WebElement partnerloanid = driver.findElement(By.xpath("//td[text()=' " + loanid + " '][1]"));
+				// System.out.println("partnerloanid : " + partnerloanid);
+				WebElement incompletebutton = driver
+						.findElement(By.xpath("//span[text()=' Incomplete ']/parent::span"));
+				incompletebutton.click();
+				Thread.sleep(1000);
+				clickcount++;
+				System.out.println("clickcount : " + clickcount);
+				if (clickcount > count) {
+					System.out.println("Please check missing documents/Please check schedular timings");
+				}
+				break;
+			} catch (Exception e) {
+				System.out.println("Application not found");
+				flag = false;
+			}
+		}
+
+	}
+
+	public void toCheckApplicationinLoanAgreement(String loanid) throws InterruptedException, IOException {
+		int count = 120;
+		int clickcount = 0;
+		boolean flag = true;
+		while (flag) {
+			try {
+				WebElement partnerloanid = driver.findElement(By.xpath("//td[text()=' " + loanid + " '][1]"));
+				// System.out.println("partnerloanid : " + partnerloanid);
+				WebElement incompletebutton = driver.findElement(By.xpath("//span[text()=' Pending ']/parent::span"));
+				incompletebutton.click();
+				Thread.sleep(1000);
+				clickcount++;
+				// System.out.println("clickcount : " + clickcount);
+				if (clickcount > count) {
+					System.out.println("Please check missing documents/Please check schedular timings");
+				}
+				break;
+			} catch (Exception e) {
+				System.out.println("Application not found");
+				flag = false;
+			}
+		}
+		System.out.println("came out of the loop");
+
+	}
+
+	public void toCheckApplicationinLoanAgreementReceived(String loanid) throws InterruptedException, IOException {
+		Thread.sleep(3000);
+		try {
+			WebElement partnerloanid = driver.findElement(By.xpath("//td[text()=' " + loanid + " '][1]"));
+			// System.out.println("partnerloanid : " + partnerloanid);
+			if(partnerloanid!=null) {
+			WebElement agreementreceivedbutton = driver.findElement(By.xpath("//span[text()=' Received ']/parent::span"));
+			agreementreceivedbutton.click();
+			Thread.sleep(2000);
+			driver.findElement(By.xpath("//td[text()=' "+loanid+" ']/parent::tr//child::button[@ng-reflect-ng-class='review-button']")).click();
+			Thread.sleep(4000);
+			wutil.toScrollBottomOfthePage(driver);
+			}
+		} catch (Exception e) {
+			System.out.println("Application not found");
+		}
 	}
 
 	public void loanEntryLoantypedropdown(String loantype) throws InterruptedException {
@@ -363,6 +434,7 @@ public class KcreditPage extends BaseClass1 {
 		}
 
 	}
+
 	public void finalRejectApplication() throws InterruptedException {
 		wutil.toScrollBottomOfthePage(driver);
 		Thread.sleep(2000);
@@ -408,8 +480,26 @@ public class KcreditPage extends BaseClass1 {
 		WebElement commentbox = driver.findElement(By.xpath("//textarea[@ng-reflect-name='comment']"));
 		commentbox.sendKeys("Approved");
 		Thread.sleep(3000);
-		//WebElement Approvebutton = driver.findElement(By.xpath("//span[text()='Yes, Approve']/parent::button"));
-		//Approvebutton.click();
+		// WebElement Approvebutton = driver.findElement(By.xpath("//span[text()='Yes,
+		// Approve']/parent::button"));
+		// Approvebutton.click();
+	}
+
+	public void loanAgreementPending() throws InterruptedException {
+		Thread.sleep(2000);
+		driver.findElement(By.xpath("//span[text()=' Loan Agreement ']/parent::span")).click();
+		Thread.sleep(1000);
+		driver.findElement(By.xpath("//span[text()=' Pending ']/parent::span")).click();
+
+	}
+
+	public void loanAgreementReceived() throws InterruptedException {
+		Thread.sleep(2000);
+		// driver.findElement(By.xpath("//span[text()=' Loan Agreement
+		// ']/parent::span")).click();
+		// Thread.sleep(1000);
+		driver.findElement(By.xpath("//span[text()=' Received ']/parent::span")).click();
+
 	}
 
 }
